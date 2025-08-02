@@ -1,3 +1,45 @@
+# Check what's in the dist folder
+ls -la dist/
+
+# Check if data.js was created
+ls -la src/
+
+# The issue is TypeScript isn't compiling .js files, only .ts files
+# Let's rename it to .ts so TypeScript compiles it
+mv src/data.js src/data.ts
+
+# Update the data.ts file with proper TypeScript syntax
+cat > src/data.ts << 'EOF'
+export const programs = [
+  {
+    id: '1',
+    name: 'Co-op Program',
+    slug: 'coop',
+    description: 'Traditional cooperative education with leading companies',
+    duration: '4-6 months'
+  },
+  {
+    id: '2',
+    name: 'Remote@AUI',
+    slug: 'remote',
+    description: 'Remote work opportunities with global companies',
+    duration: '3-12 months'
+  },
+  {
+    id: '3',
+    name: 'Alternance',
+    slug: 'alternance',
+    description: 'Work-study program alternating periods',
+    duration: '12-24 months'
+  }
+];
+
+export const getAllPrograms = () => programs;
+export const findProgramBySlug = (slug: string) => programs.find(p => p.slug === slug);
+EOF
+
+# Update server.ts to use ES6 imports instead of require
+cat > src/server.ts << 'EOF'
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -105,3 +147,17 @@ app.listen(PORT, () => {
 });
 
 export default app;
+EOF
+
+# Rebuild with the new TypeScript files
+npm run build
+
+# Check that data.js was compiled
+ls -la dist/
+
+# Start the server
+npm start &
+
+# Wait and test
+sleep 3
+curl http://localhost:3001/api/health

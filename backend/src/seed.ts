@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
@@ -62,8 +62,50 @@ async function main() {
     },
   });
 
+  // Create test student
+  const studentPassword = await bcrypt.hash('student123', 12);
+  const studentUser = await prisma.user.upsert({
+    where: { email: 'student@aui.ma' },
+    update: {},
+    create: {
+      email: 'student@aui.ma',
+      password: studentPassword,
+      firstName: 'Youssef',
+      lastName: 'El Amrani',
+      role: 'STUDENT',
+      studentId: 'S12345',
+      major: 'Computer Science',
+      year: 3,
+      gpa: 3.8,
+      phone: '+212600123456',
+      isVerified: true,
+    },
+  });
+
+  // Create test employer
+  const employerPassword = await bcrypt.hash('employer123', 12);
+  const employerUser = await prisma.user.upsert({
+    where: { email: 'employer@techcorp.ma' },
+    update: {},
+    create: {
+      email: 'employer@techcorp.ma',
+      password: employerPassword,
+      firstName: 'Ahmed',
+      lastName: 'Bennani',
+      role: 'EMPLOYER',
+      companyName: 'TechCorp Morocco',
+      position: 'HR Manager',
+      companySize: '50-200',
+      industry: 'Technology',
+      isVerified: true,
+    },
+  });
+
   console.log('✅ Database seed completed successfully!');
-  console.log('🔐 Test account: admin@aui.ma / admin123');
+  console.log('🔐 Test accounts created:');
+  console.log('  • Admin: admin@aui.ma / admin123');
+  console.log('  • Student: student@aui.ma / student123');
+  console.log('  • Employer: employer@techcorp.ma / employer123');
 }
 
 main()
