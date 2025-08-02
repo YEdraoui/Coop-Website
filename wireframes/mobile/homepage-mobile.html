@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIL.AUI.MA - Mobile</title>
+    <link rel="stylesheet" href="../assets/brand-guidelines.css">
+    <style>
+        /* Mobile-First Design */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+        }
+        
+        .mobile-nav {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        
+        .mobile-nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--aui-primary);
+        }
+        
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--aui-primary);
+            cursor: pointer;
+        }
+        
+        .mobile-hero {
+            background: linear-gradient(135deg, var(--aui-primary) 0%, var(--aui-accent) 100%);
+            color: white;
+            padding: 100px 1rem 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .mobile-hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .mobile-hero p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .mobile-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .mobile-section {
+            padding: 3rem 1rem;
+        }
+        
+        .mobile-program-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+        
+        .mobile-program-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-metrics {
+            background: var(--aui-primary);
+            color: white;
+            padding: 3rem 1rem;
+        }
+        
+        .mobile-metric {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .mobile-metric-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--aui-secondary);
+            display: block;
+        }
+        
+        .mobile-metric-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .mobile-testimonial {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            border-left: 4px solid var(--aui-secondary);
+        }
+        
+        .mobile-footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 3rem 1rem 2rem;
+        }
+        
+        .mobile-footer-section {
+            margin-bottom: 2rem;
+        }
+        
+        .mobile-footer h4 {
+            color: var(--aui-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-footer a {
+            color: var(--gray-300);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-content">
+            <div class="mobile-logo">WIL.AUI</div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Hero -->
+    <section class="mobile-hero">
+        <h1>Bridge Academia & Industry</h1>
+        <p>Transform your academic knowledge into real-world experience through our work-based learning programs.</p>
+        <div class="mobile-cta">
+            <a href="/programs" class="btn btn-secondary">Explore Programs</a>
+            <a href="/employers/partnership" class="btn btn-outline">Partner With Us</a>
+        </div>
+    </section>
+
+    <!-- Mobile Programs -->
+    <section class="mobile-section" style="background: var(--gray-50);">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: var(--aui-primary);">Choose Your Path</h2>
+        
+        <div class="mobile-program-card">
+            <div class="mobile-program-icon">🏢</div>
+            <h3 style="color: var(--aui-primary);">Co-op Program</h3>
+            <p style="color: var(--gray-600); margin-bottom: 1rem;">Traditional cooperative education with leading companies. 4-6 months of hands-on experience.</p>
+            <a href="/programs/coop" class="btn btn-primary">Learn More</a>
+        </div>
+        
+        <div class="mobile-program-card">
+            <div class="mobile-program-icon">🌍</div>
+            <h3 style="color: var(--aui-primary);">Remote@AUI</h3>
+            <p style="color: var(--gray-600); margin-bottom: 1rem;">Work remotely with global companies. 3-12 months of international experience.</p>
+            <a href="/programs/remote" class="btn btn-primary">Learn More</a>
+        </div>
+        
+        <div class="mobile-program-card">
+            <div class="mobile-program-icon">⚖️</div>
+            <h3 style="color: var(--aui-primary);">Alternance</h3>
+            <p style="color: var(--gray-600); margin-bottom: 1rem;">Perfect balance of study and work. 12-24 months of alternating periods.</p>
+            <a href="/programs/alternance" class="btn btn-primary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Mobile Metrics -->
+    <section class="mobile-metrics">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: white;">Impact by Numbers</h2>
+        
+        <div class="mobile-metric">
+            <span class="mobile-metric-number">250+</span>
+            <div class="mobile-metric-label">Students Placed</div>
+        </div>
+        
+        <div class="mobile-metric">
+            <span class="mobile-metric-number">45+</span>
+            <div class="mobile-metric-label">Partner Companies</div>
+        </div>
+        
+        <div class="mobile-metric">
+            <span class="mobile-metric-number">85%</span>
+            <div class="mobile-metric-label">Employment Rate</div>
+        </div>
+        
+        <div class="mobile-metric">
+            <span class="mobile-metric-number">12K</span>
+            <div class="mobile-metric-label">Avg. Salary (MAD)</div>
+        </div>
+    </section>
+
+    <!-- Mobile Success Stories -->
+    <section class="mobile-section">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: var(--aui-primary);">Success Stories</h2>
+        
+        <div class="mobile-testimonial">
+            <p style="font-style: italic; margin-bottom: 1rem; color: var(--gray-600);">
+                "The Co-op program opened doors I never knew existed. I'm now a full-time software engineer."
+            </p>
+            <div style="font-weight: 600; color: var(--aui-primary);">Youssef El Amrani</div>
+            <div style="color: var(--gray-500); font-size: 0.875rem;">Computer Science '23</div>
+        </div>
+        
+        <div class="mobile-testimonial">
+            <p style="font-style: italic; margin-bottom: 1rem; color: var(--gray-600);">
+                "Remote@AUI gave me global perspective and invaluable network connections worldwide."
+            </p>
+            <div style="font-weight: 600; color: var(--aui-primary);">Aicha Benali</div>
+            <div style="color: var(--gray-500); font-size: 0.875rem;">Business Admin '24</div>
+        </div>
+    </section>
+
+    <!-- Mobile CTA -->
+    <section style="background: var(--aui-accent); color: white; padding: 3rem 1rem; text-align: center;">
+        <h2 style="color: white; margin-bottom: 1rem;">Ready to Start?</h2>
+        <p style="margin-bottom: 2rem; opacity: 0.9;">Join hundreds of AUI students launching their careers.</p>
+        <div class="mobile-cta">
+            <a href="/students/apply" class="btn btn-secondary">Apply Now</a>
+            <a href="/programs" class="btn btn-outline">View Programs</a>
+        </div>
+    </section>
+
+    <!-- Mobile Footer -->
+    <footer class="mobile-footer">
+        <div class="mobile-footer-section">
+            <h4>Programs</h4>
+            <a href="/programs/coop">Co-op Program</a>
+            <a href="/programs/remote">Remote@AUI</a>
+            <a href="/programs/alternance">Alternance</a>
+        </div>
+        
+        <div class="mobile-footer-section">
+            <h4>Students</h4>
+            <a href="/students/apply">How to Apply</a>
+            <a href="/students/portal">Student Portal</a>
+            <a href="/students/stories">Success Stories</a>
+        </div>
+        
+        <div class="mobile-footer-section">
+            <h4>Employers</h4>
+            <a href="/employers/partnership">Partner With Us</a>
+            <a href="/employers/portal">Employer Portal</a>
+        </div>
+        
+        <div class="mobile-footer-section">
+            <h4>Contact</h4>
+            <a href="mailto:wil@aui.ma">wil@aui.ma</a>
+            <a href="tel:+212535269000">+212 5 35 26 90 00</a>
+        </div>
+        
+        <div style="border-top: 1px solid var(--gray-800); padding-top: 2rem; text-align: center; color: var(--gray-400);">
+            <p>&copy; 2025 Al Akhawayn University</p>
+        </div>
+    </footer>
+</body>
+</html>
