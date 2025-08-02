@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Portal - WIL.AUI.MA</title>
+    <link rel="stylesheet" href="../assets/brand-guidelines.css">
+    <style>
+        /* Reuse portal layout styles from student portal */
+        .portal-layout {
+            display: flex;
+            min-height: 100vh;
+            margin-top: 80px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: var(--gray-900);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            top: 80px;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+        
+        .sidebar-logo {
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid var(--gray-700);
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-logo h3 {
+            color: var(--aui-secondary);
+            margin: 0;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 2rem;
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background: var(--aui-primary);
+            color: white;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+            background: var(--gray-50);
+            min-height: calc(100vh - 80px);
+        }
+        
+        .portal-header {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Opportunity Cards */
+        .opportunity-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--aui-accent);
+        }
+        
+        .opportunity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .opportunity-title {
+            color: var(--aui-primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .opportunity-meta {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--aui-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Applicant Cards */
+        .applicant-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .applicant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .applicant-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .applicant-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--aui-light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--aui-primary);
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+        
+        .applicant-name {
+            color: var(--aui-primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .applicant-details {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+        
+        .applicant-skills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .skill-tag {
+            background: var(--aui-light-blue);
+            color: var(--aui-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Portal Layout -->
+    <div class="portal-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h3>Employer Portal</h3>
+                <p style="color: var(--gray-400); margin: 0; font-size: 0.875rem;">TechCorp Morocco</p>
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="#dashboard" class="sidebar-link active">
+                            <span class="sidebar-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#opportunities" class="sidebar-link">
+                            <span class="sidebar-icon">💼</span>
+                            My Opportunities
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#applicants" class="sidebar-link">
+                            <span class="sidebar-icon">👥</span>
+                            Applicants
+                            <span style="background: var(--aui-secondary); color: var(--aui-primary); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; margin-left: auto;">8</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#post" class="sidebar-link">
+                            <span class="sidebar-icon">✏️</span>
+                            Post Opportunity
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#profile" class="sidebar-link">
+                            <span class="sidebar-icon">🏢</span>
+                            Company Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#analytics" class="sidebar-link">
+                            <span class="sidebar-icon">📈</span>
+                            Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#messages" class="sidebar-link">
+                            <span class="sidebar-icon">💬</span>
+                            Messages
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#settings" class="sidebar-link">
+                            <span class="sidebar-icon">⚙️</span>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Portal Header -->
+            <div class="portal-header">
+                <h1>Welcome back, TechCorp!</h1>
+                <p>Manage your opportunities, review applications, and connect with talented AUI students.</p>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div style="background: white; border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                <h2 style="color: var(--aui-primary); margin-bottom: 1.5rem;">Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <div class="stat-label">Active Opportunities</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24</span>
+                        <div class="stat-label">Total Applications</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <div class="stat-label">Pending Review</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <div class="stat-label">Interviews Scheduled</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Opportunities -->
+            <div style="background: white; border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="color: var(--aui-primary); margin: 0;">Active Opportunities</h2>
+                    <a href="#post" class="btn btn-primary">Post New Opportunity</a>
+                </div>
+                
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div>
+                            <div class="opportunity-title">Software Developer Co-op</div>
+                            <div class="opportunity-meta">
+                                <span>📅 Posted: March 10, 2025</span>
+                                <span>⏰ Deadline: April 15, 2025</span>
+                                <span>📍 Casablanca</span>
+                            </div>
+                        </div>
+                        <div class="status-badge status-approved">Active</div>
+                    </div>
+                    <p style="color: var(--gray-600); margin-bottom: 1rem;">Seeking passionate computer science students to join our development team working on innovative web applications.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <div class="stat-label">Applications</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5</span>
+                            <div class="stat-label">Under Review</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <div class="stat-label">Shortlisted</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25</span>
+                            <div class="stat-label">Days Left</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" class="btn btn-outline">View Applications</a>
+                        <a href="#" class="btn btn-primary">Edit Opportunity</a>
+                    </div>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="opportunity-header">
+                        <div>
+                            <div class="opportunity-title">Data Analyst Intern</div>
+                            <div class="opportunity-meta">
+                                <span>📅 Posted: March 5, 2025</span>
+                                <span>⏰ Deadline: April 1, 2025</span>
+                                <span>📍 Remote</span>
+                            </div>
+                        </div>
+                        <div class="status-badge status-pending">Pending Review</div>
+                    </div>
+                    <p style="color: var(--gray-600); margin-bottom: 1rem;">Remote internship opportunity for students interested in data analysis and business intelligence.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <div class="stat-label">Applications</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2</span>
+                            <div class="stat-label">Under Review</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1</span>
+                            <div class="stat-label">Shortlisted</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <div class="stat-label">Days Left</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" class="btn btn-outline">View Applications</a>
+                        <a href="#" class="btn btn-primary">Edit Opportunity</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Applicants -->
+            <div style="background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm);">
+                <h2 style="color: var(--aui-primary); margin-bottom: 1.5rem;">Recent Applicants</h2>
+                
+                <div class="applicant-card">
+                    <div class="applicant-header">
+                        <div class="applicant-info">
+                            <div class="applicant-avatar">YE</div>
+                            <div>
+                                <div class="applicant-name">Youssef El Amrani</div>
+                                <div class="applicant-details">Computer Science • Year 3 • GPA: 3.8</div>
+                            </div>
+                        </div>
+                        <div class="status-badge status-pending">New Application</div>
+                    </div>
+                    <div class="applicant-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.875rem; margin-bottom: 1rem;">Applied for: Software Developer Co-op • 2 hours ago</p>
+                    <div class="action-buttons">
+                        <a href="#" class="btn btn-outline btn-sm">View Profile</a>
+                        <a href="#" class="btn btn-primary btn-sm">Review Application</a>
+                        <a href="#" class="btn btn-secondary btn-sm">Schedule Interview</a>
+                    </div>
+                </div>
+
+                <div class="applicant-card">
+                    <div class="applicant-header">
+                        <div class="applicant-info">
+                            <div class="applicant-avatar">AB</div>
+                            <div>
+                                <div class="applicant-name">Aicha Benali</div>
+                                <div class="applicant-details">Business Administration • Year 4 • GPA: 3.9</div>
+                            </div>
+                        </div>
+                        <div class="status-badge status-under-review">Under Review</div>
+                    </div>
+                    <div class="applicant-skills">
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Statistics</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.875rem; margin-bottom: 1rem;">Applied for: Data Analyst Intern • 1 day ago</p>
+                    <div class="action-buttons">
+                        <a href="#" class="btn btn-outline btn-sm">View Profile</a>
+                        <a href="#" class="btn btn-primary btn-sm">Continue Review</a>
+                        <a href="#" class="btn btn-secondary btn-sm">Schedule Interview</a>
+                    </div>
+                </div>
+
+                <div class="applicant-card">
+                    <div class="applicant-header">
+                        <div class="applicant-info">
+                            <div class="applicant-avatar">OR</div>
+                            <div>
+                                <div class="applicant-name">Omar Rachidi</div>
+                                <div class="applicant-details">Engineering • Year 3 • GPA: 3.7</div>
+                            </div>
+                        </div>
+                        <div class="status-badge status-approved">Shortlisted</div>
+                    </div>
+                    <div class="applicant-skills">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">AutoCAD</span>
+                        <span class="skill-tag">MATLAB</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.875rem; margin-bottom: 1rem;">Applied for: Software Developer Co-op • 3 days ago</p>
+                    <div class="action-buttons">
+                        <a href="#" class="btn btn-outline btn-sm">View Profile</a>
+                        <a href="#" class="btn btn-primary btn-sm">Interview Details</a>
+                        <a href="#" class="btn btn-secondary btn-sm">Send Message</a>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="#applicants" class="btn btn-secondary">View All Applicants</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co-op Program - WIL.AUI.MA</title>
+    <link rel="stylesheet" href="../assets/brand-guidelines.css">
+    <style>
+        /* Include navbar styles from homepage */
+        .navbar {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--aui-primary);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--aui-primary);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            background: var(--gray-50);
+            padding: 1rem 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+        
+        .breadcrumb-link {
+            color: var(--aui-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Program Hero */
+        .program-hero {
+            background: linear-gradient(135deg, var(--aui-primary) 0%, var(--aui-accent) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .program-hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .program-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .program-quick-facts {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .quick-fact {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .quick-fact-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--aui-secondary);
+            display: block;
+        }
+        
+        .quick-fact-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            padding: 80px 0;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+        }
+        
+        .content-section h2 {
+            color: var(--aui-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--aui-light-blue);
+        }
+        
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .requirements-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+        }
+        
+        .requirement-icon {
+            color: var(--success);
+            font-weight: bold;
+            margin-top: 0.1rem;
+        }
+        
+        .timeline {
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--aui-primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--aui-secondary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--aui-primary);
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: var(--aui-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .sidebar h3 {
+            color: var(--aui-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .sidebar-cta {
+            background: var(--aui-light-blue);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info {
+            border-top: 1px solid var(--gray-200);
+            padding-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .contact-icon {
+            color: var(--aui-primary);
+            width: 20px;
+        }
+        
+        .related-programs {
+            margin-top: 2rem;
+        }
+        
+        .related-program {
+            display: block;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .related-program:hover {
+            background: var(--aui-light-blue);
+            color: var(--aui-primary);
+        }
+        
+        /* FAQ Section */
+        .faq-item {
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background: var(--gray-50);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            color: var(--aui-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background: var(--aui-light-blue);
+        }
+        
+        .faq-answer {
+            padding: 1.5rem;
+            background: white;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        /* Success Stories */
+        .success-story {
+            background: var(--aui-light-blue);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--aui-primary);
+        }
+        
+        .success-quote {
+            font-style: italic;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--gray-700);
+        }
+        
+        .success-author {
+            font-weight: 600;
+            color: var(--aui-primary);
+        }
+        
+        .success-details {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .program-quick-facts {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .program-hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">WIL.AUI.MA</a>
+            <ul class="nav-menu">
+                <li><a href="/programs" class="nav-link">Programs</a></li>
+                <li><a href="/students" class="nav-link">Students</a></li>
+                <li><a href="/employers" class="nav-link">Employers</a></li>
+                <li><a href="/impact" class="nav-link">Impact</a></li>
+                <li><a href="/resources" class="nav-link">Resources</a></li>
+            </ul>
+            <a href="/auth/login" class="btn btn-primary">Login</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumbs -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="/" class="breadcrumb-link">Home</a>
+                <span>›</span>
+                <a href="/programs" class="breadcrumb-link">Programs</a>
+                <span>›</span>
+                <span>Co-op Program</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Program Hero -->
+    <section class="program-hero">
+        <div class="container">
+            <h1>Co-op Program</h1>
+            <p>Gain valuable industry experience through our traditional cooperative education program. Work with leading companies while earning academic credit and building your professional network.</p>
+            
+            <div class="program-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-fact-value">4-6</span>
+                    <div class="quick-fact-label">Months Duration</div>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-fact-value">3.0+</span>
+                    <div class="quick-fact-label">Min GPA Required</div>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-fact-value">150+</span>
+                    <div class="quick-fact-label">Students Placed</div>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-fact-value">90%</span>
+                    <div class="quick-fact-label">Success Rate</div>
+                </div>
+            </div>
+            
+            <a href="/students/apply?program=coop" class="btn btn-secondary">Apply Now</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="content-grid">
+            <!-- Main Content -->
+            <div class="main-column">
+                <!-- Overview Section -->
+                <div class="content-section">
+                    <h2>Program Overview</h2>
+                    <p>The Co-op Program is AUI's flagship work-based learning initiative, designed to bridge the gap between academic theory and professional practice. Students work full-time with our industry partners while maintaining their academic progression.</p>
+                    
+                    <p>This program provides students with the opportunity to apply classroom knowledge in real-world settings, develop professional skills, and build networks that will benefit their future careers. Our partner companies span various industries including technology, finance, engineering, and consulting.</p>
+                    
+                    <div class="success-story">
+                        <div class="success-quote">
+                            "The Co-op program was transformative. I gained practical experience, built confidence, and secured a full-time offer before graduation. The support from both AUI and my host company was exceptional."
+                        </div>
+                        <div class="success-author">Sara Bennani</div>
+                        <div class="success-details">Computer Science '23 • Now Software Engineer at TechnoSoft Morocco</div>
+                    </div>
+                </div>
+
+                <!-- Requirements Section -->
+                <div class="content-section">
+                    <h2>Eligibility Requirements</h2>
+                    <ul class="requirements-list">
+                        <li>
+                            <span class="requirement-icon">✓</span>
+                            <div>
+                                <strong>Academic Standing:</strong> Minimum cumulative GPA of 3.0 and good academic standing with no disciplinary issues.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="requirement-icon">✓</span>
+                            <div>
+                                <strong>Course Completion:</strong> Completion of foundational courses in your major and at least 60 credit hours.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="requirement-icon">✓</span>
+                            <div>
+                                <strong>Faculty Recommendation:</strong> Letter of recommendation from a faculty member in your department.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="requirement-icon">✓</span>
+                            <div>
+                                <strong>Professional Skills:</strong> Demonstrated communication skills, professionalism, and relevant technical competencies.
+                            </div>
+                        </li>
+                        <li>
+                            <span class="requirement-icon">✓</span>
+                            <div>
+                                <strong>Time Commitment:</strong> Availability for full-time work (40 hours/week) for the program duration.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Application Process -->
+                <div class="content-section">
+                    <h2>Application Process & Timeline</h2>
+                    <ul class="timeline">
+                        <li class="timeline-item">
+                            <div class="timeline-title">Application Submission</div>
+                            <p>Complete online application including essays, resume, and academic transcripts. Applications open each semester.</p>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-title">Initial Review</div>
+                            <p>Academic and professional background review by the WIL team. Candidates may be invited for an interview.</p>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-title">Company Matching</div>
+                            <p>Successful applicants are matched with partner companies based on interests, skills, and availability.</p>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-title">Company Interview</div>
+                            <p>Final interview with the host company to ensure mutual fit and discuss project expectations.</p>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-title">Placement Confirmation</div>
+                            <p>Formal placement confirmation and orientation session before starting the co-op experience.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Benefits Section -->
+                <div class="content-section">
+                    <h2>Program Benefits</h2>
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <h4 style="color: var(--aui-primary); margin-bottom: 1rem;">Professional Development</h4>
+                            <ul style="color: var(--gray-700);">
+                                <li>Real-world work experience</li>
+                                <li>Industry mentorship</li>
+                                <li>Professional network building</li>
+                                <li>Skill development and training</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--aui-primary); margin-bottom: 1rem;">Academic Integration</h4>
+                            <ul style="color: var(--gray-700);">
+                                <li>Academic credit (3-6 credits)</li>
+                                <li>Faculty supervision</li>
+                                <li>Reflection and learning portfolio</li>
+                                <li>Career guidance and planning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="content-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How is the Co-op program different from a regular internship?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            The Co-op program is more structured and longer than typical internships. It includes academic credit, faculty supervision, regular check-ins, and a formal learning portfolio. Students also receive comprehensive career support throughout the experience.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Are Co-op positions paid?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Most Co-op positions are paid, with salaries varying by industry and company. Some positions may offer other benefits like housing stipends, transportation, or professional development allowances.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can international students participate?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, international students can participate. However, they may need to obtain appropriate work authorization. Our team works with international students to navigate visa and work permit requirements.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3>Ready to Apply?</h3>
+                <div class="sidebar-cta">
+                    <p style="margin-bottom: 1rem; color: var(--gray-700);">Join 150+ students who have launched their careers through our Co-op program.</p>
+                    <a href="/students/apply?program=coop" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Start Application</a>
+                    <a href="/resources/coop-guide.pdf" class="btn btn-outline" style="width: 100%;">Download Guide</a>
+                </div>
+
+                <div class="contact-info">
+                    <h4 style="color: var(--aui-primary); margin-bottom: 1rem;">Contact Information</h4>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>coop@aui.ma</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <span>+212 5 35 26 90 15</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>Career Services Office<br>Building 19, Room 101</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🕒</span>
+                        <span>Mon-Fri: 9:00 AM - 5:00 PM</span>
+                    </div>
+                </div>
+
+                <div class="related-programs">
+                    <h4 style="color: var(--aui-primary); margin-bottom: 1rem;">Other Programs</h4>
+                    <a href="/programs/remote" class="related-program">
+                        <strong>Remote@AUI</strong><br>
+                        <small>Work remotely with global companies</small>
+                    </a>
+                    <a href="/programs/alternance" class="related-program">
+                        <strong>Alternance Program</strong><br>
+                        <small>Balance work and study periods</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
