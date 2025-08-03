@@ -1,4 +1,4 @@
-# Node / Next / TypeScript
+# Node / Next / TS
 node_modules/
 .npm/
 .next/
@@ -18,12 +18,10 @@ coverage/
 .vscode/
 .idea/
 
-# Build artifacts
+# Build artifacts (monorepo)
 frontend/.next/
 frontend/out/
 backend/dist/
 
 # Cache
 *.cache
-
-# Public assets stay but no binaries >100MB

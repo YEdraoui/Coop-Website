@@ -1,3 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+FRONTEND="$HOME/Desktop/E+E Website/wil-aui-platform/frontend"
+cd "$FRONTEND"
+
+echo "➡️ Enforce AUI brand tokens in Tailwind"
+# If extend not present, create minimal config; otherwise inject/replace
+if ! grep -q "brand: {.*green" tailwind.config.js 2>/dev/null; then
+  # Try to append an extend block safely
+  cat >> tailwind.config.js <<'EOF'
+
+/* --- AUI brand tokens (forced) --- */
+module.exports = {
+  ...(module.exports || {}),
+  theme: {
+    ...(module.exports?.theme || {}),
+    extend: {
+      ...(module.exports?.theme?.extend || {}),
+      colors: {
+        ...(module.exports?.theme?.extend?.colors || {}),
+        brand: {
+          green: '#0C5F4C',
+          greenDark: '#0B3C32',
+          yellow: '#F6C21A',
+          bg: '#F7FAF9',
+          text: '#0A2721'
+        }
+      }
+    }
+  }
+}
+EOF
+else
+  # Replace any existing brand.* with the exact values
+  perl -0777 -pe "s/brand:\s*\{[^}]*\}/brand: { green: '#0C5F4C', greenDark: '#0B3C32', yellow: '#F6C21A', bg: '#F7FAF9', text: '#0A2721' }/s" -i tailwind.config.js
+fi
+
+echo "➡️ Replace the homepage with required layout (WIL logo in nav, no centered hero logo, yellow title)"
+cat > src/app/page.tsx <<'EOF'
 'use client';
 
 import Image from 'next/image';
@@ -223,3 +262,9 @@ export default function HomePage() {
     </div>
   );
 }
+EOF
+
+echo "🧹 Clear Next cache and restart dev"
+rm -rf .next
+echo "Done. Now run: npm run dev"
+

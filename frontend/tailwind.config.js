@@ -115,3 +115,24 @@ module.exports = {
   },
   plugins: [],
 }
+
+/* --- AUI brand tokens (forced) --- */
+module.exports = {
+  ...(module.exports || {}),
+  theme: {
+    ...(module.exports?.theme || {}),
+    extend: {
+      ...(module.exports?.theme?.extend || {}),
+      colors: {
+        ...(module.exports?.theme?.extend?.colors || {}),
+        brand: {
+          green: '#0C5F4C',
+          greenDark: '#0B3C32',
+          yellow: '#F6C21A',
+          bg: '#F7FAF9',
+          text: '#0A2721'
+        }
+      }
+    }
+  }
+}
