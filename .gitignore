@@ -18,10 +18,7 @@ coverage/
 .vscode/
 .idea/
 
-# Build artifacts (monorepo)
+# App-specific
 frontend/.next/
 frontend/out/
 backend/dist/
-
-# Cache
-*.cache
