@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com' }
-    ]
-  },
-  async redirects() {
-    return [
-      { source: '/programs/remote', destination: '/programs/remote-aui', permanent: true },
-    ];
-  }
-}
+  output: 'export',                         // static export
+  trailingSlash: true,                      // needed for GitHub Pages
+  images: { unoptimized: true, remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }] },
+};
 export default nextConfig;
