@@ -1,0 +1,11 @@
+
+# Brand Assets
+# Keep only specific image formats in public_assets
+public_assets/**/*
+!public_assets/**/*.png
+!public_assets/**/*.jpg
+!public_assets/**/*.jpeg
+!public_assets/**/*.svg
+!public_assets/**/*.webp
+!public_assets/**/*.ico
+!public_assets/**/.keep

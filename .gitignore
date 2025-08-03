@@ -1,44 +1,29 @@
-# Dependencies
+# Node / Next / TypeScript
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Production builds
-/frontend/build
-/frontend/.next
-/backend/dist
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-logs
+.npm/
+.next/
+dist/
+out/
+coverage/
+.eslintcache
 *.log
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# Env & local
+.env
+.env.*.local
 
-# Coverage directory used by tools like istanbul
-coverage/
+# OS / Editor
+.DS_Store
+*.swp
+.vscode/
+.idea/
 
-# Database
-*.sqlite
-*.db
+# Build artifacts
+frontend/.next/
+frontend/out/
+backend/dist/
+
+# Cache
+*.cache
+
+# Public assets stay but no binaries >100MB

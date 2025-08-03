@@ -1,7 +1,7 @@
 {
   "name": "wil-aui-platform",
   "version": "1.0.0",
-  "description": "Work-Based Learning platform for Al Akhawayn University",
+  "description": "Work-Based Learning Platform for Al Akhawayn University",
   "scripts": {
     "dev": "npm run dev:backend & npm run dev:frontend",
     "dev:frontend": "cd frontend && npm run dev",
@@ -12,11 +12,26 @@
     "start": "npm run start:backend & npm run start:frontend",
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm start",
-    "setup": "npm run setup:frontend && npm run setup:backend",
-    "setup:frontend": "cd frontend && npm install",
-    "setup:backend": "cd backend && npm install",
     "test": "npm run test:frontend && npm run test:backend",
     "test:frontend": "cd frontend && npm test",
-    "test:backend": "cd backend && npm test"
-  }
+    "test:backend": "cd backend && npm test",
+    "launch-check": "./quick-launch.sh",
+    "deploy": "npm run build && echo 'Ready for deployment - see DEPLOYMENT-GUIDE.md'"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "work-based-learning",
+    "aui",
+    "al-akhawayn-university",
+    "co-op",
+    "internship",
+    "alternance",
+    "morocco",
+    "education"
+  ],
+  "author": "AUI Work-Based Learning Team",
+  "license": "MIT"
 }
